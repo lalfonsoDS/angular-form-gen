@@ -13,7 +13,7 @@
 <!-- fieldName -->
 <div ng-if="fields.fieldname">
   <div fg-property-field="fieldName" fg-property-field-label="Name">
-    <input type="text"
+    <!-- <input type="text"
            class="form-control"
            name="fieldName"
            ng-model="field.name"
@@ -21,6 +21,15 @@
            ng-pattern="/^[a-zA-Z]([\w]+)?$/"
            fg-unique-field-name
            change-on-blur="propChanged()"/>
+    FTFs: {{formTypeFields}} -->
+
+    <select class="form-control"
+           ng-required="true"
+           ng-model="field.name"
+           ng-change="propChanged()"
+           ng-options="formTypeField.fieldName as formTypeField.fieldName for formTypeField in field.formTypeFields">
+           <option value="">Select One</option>
+    </select>
   </div>
 </div>
 

@@ -14,7 +14,6 @@ fg.directive('fgEditCanvasField', function ($timeout) {
       }
 
       $scope.$watch('field.$_displayProperties', function (value) {
-
         if (value) {
           $scope.expanded = true;
         } else {

@@ -16,6 +16,25 @@ app.controller('FormEditCtrl', function ($scope, $location, inform, $window, for
     console.log("FIELD: ", $scope.form.schema.fields[index]);
   }
 
+  $scope.formTypeFields = [
+    {
+      fieldName: "FIRST_NAME",
+      required: false
+    },
+    {
+      fieldName: "EMAIL",
+      required: false
+    },
+    {
+      fieldName: "LAST_NAME",
+      required: false
+    },
+    {
+      fieldName: "COMPANY_EMPLOYEE_ID",
+      required: false
+    }
+  ];
+
   $scope.form = form;
 
   // Precreate the (form) $state object here so we can access it later.

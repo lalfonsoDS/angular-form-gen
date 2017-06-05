@@ -4,7 +4,7 @@ fg.directive('fgPropertyFieldCommon', function(fgPropertyFieldCommonLinkFn) {
     templateUrl: 'angular-form-gen/edit/canvas/field/properties/property-field/common.ng.html',
     link: fgPropertyFieldCommonLinkFn
   };
-}).factory('fgPropertyFieldCommonLinkFn', function() {
+}).factory('fgPropertyFieldCommonLinkFn', function($rootScope) {
   return function($scope, $element, $attrs, ctrls) {
     $scope.fields = {
       fieldname: false,

@@ -1,6 +1,16 @@
 fg.controller('fgSchemaController', function($scope, fgUtils) {
 
   var _model;
+  var _formTypeFields;
+
+  this.updateTypeFields = function(formTypeFields) {
+    if (formTypeFields) { _formTypeFields = formTypeFields; };
+    _model.fields = _model.fields.map(function(field) {
+      return angular.extend({}, field, {
+        formTypeFields: formTypeFields
+      });
+    });
+  };
 
   this.model = function(value) {
     if(value !== undefined) {
@@ -16,6 +26,7 @@ fg.controller('fgSchemaController', function($scope, fgUtils) {
 
   this.addField = function(field, index) {
     var copy = fgUtils.copyField(field);
+    copy.formTypeFields = _formTypeFields;
 
     index = index === undefined ? _model.fields.length : index;
     _model.fields.splice(index, 0, copy);

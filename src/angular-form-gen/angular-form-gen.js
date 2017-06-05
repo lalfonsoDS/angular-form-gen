@@ -6,7 +6,8 @@ var fg = angular.module('fg', ['dq']);
  * @param {object} properties   [optional] Initial property values
  */
 fg.constant('FgField', function FgField(type, properties) {
-    this.name = this.type = type;
+    // this.name = this.type = type;
+    this.type = type;
 
     if (properties) {
       angular.extend(this, properties);

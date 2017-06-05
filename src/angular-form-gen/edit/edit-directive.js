@@ -1,4 +1,4 @@
-fg.directive('fgEdit', function () {
+fg.directive('fgEdit', function ($rootScope) {
   return {
     priority: 100,
     require: 'fgSchema',
@@ -8,6 +8,7 @@ fg.directive('fgEdit', function () {
       moveFieldCallback: "=?",
       removeFieldCallback: "=?",
       modifyPropertyCallback: "=?",
+      formTypeFields: "=",
       // // The schema model to edit
       schema: '=?fgSchema'
 //      // Boolean indicating wether to show the default form action buttons
@@ -27,6 +28,11 @@ fg.directive('fgEdit', function () {
       schemaCtrl.moveFieldCallback = $scope.moveFieldCallback;
       schemaCtrl.removeFieldCallback = $scope.removeFieldCallback;
       schemaCtrl.modifyPropertyCallback = $scope.modifyPropertyCallback;
+      $scope.$watch('formTypeFields', function(newValue, oldValue){
+        if (newValue) {
+          schemaCtrl.updateTypeFields(newValue);
+        }
+      }, true);
       if ($scope.schema === undefined) {
         $scope.schema = {};
       }
