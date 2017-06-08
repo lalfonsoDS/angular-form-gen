@@ -101,6 +101,17 @@
   right: 5px;
 }
 
+.fg-field-overlay .btn-toolbar-right button {
+  border: none;
+  background-color: transparent;
+  overflow: hidden;
+  outline: none;
+}
+
+.fg-field-overlay .btn-toolbar-right button:hover {
+  border: 1px solid;
+}
+
 .fg-field-overlay .btn-toolbar-left {
   left: 5px;
 }
@@ -299,6 +310,17 @@
     margin-bottom: 20px;
   }
 }
+
+/* mockups*/
+.edit-properties-icon {
+  background:url('https://s3.amazonaws.com/workstride-assets/workstride-assets/images/formBuilder/edit_icon.png');
+  background-repeat: no-repeat;
+  /*padding-left: 20px;*/
+  /*padding-right: 10px;*/
+  display: block;
+  /*background-position-y: 10px;*/
+}
+
 
 /*.fg-edit-palette .controls {*/
   /*margin-left: 0;*/

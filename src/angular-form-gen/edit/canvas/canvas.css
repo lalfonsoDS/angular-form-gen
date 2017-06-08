@@ -108,3 +108,13 @@
     margin-bottom: 20px;
   }
 }
+
+/* mockups*/
+.edit-properties-icon {
+  background:url('https://s3.amazonaws.com/workstride-assets/workstride-assets/images/formBuilder/edit_icon.png');
+  background-repeat: no-repeat;
+  /*padding-left: 20px;*/
+  /*padding-right: 10px;*/
+  display: block;
+  /*background-position-y: 10px;*/
+}

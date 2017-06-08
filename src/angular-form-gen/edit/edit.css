@@ -71,6 +71,17 @@
   right: 5px;
 }
 
+.fg-field-overlay .btn-toolbar-right button {
+  border: none;
+  background-color: transparent;
+  overflow: hidden;
+  outline: none;
+}
+
+/*.fg-field-overlay .btn-toolbar-right button:hover {
+  border: 1px solid;
+}*/
+
 .fg-field-overlay .btn-toolbar-left {
   left: 5px;
 }
