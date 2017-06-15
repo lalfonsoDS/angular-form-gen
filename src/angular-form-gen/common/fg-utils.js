@@ -86,7 +86,8 @@ fg.factory('fgUtils', function ($templateCache, $window, fgConfig) {
       },
       copyField: function(field) {
         var copy = angular.copy(field);
-        copy.name = 'field' + this.getUnique();
+        // copy.name = 'field' + this.getUnique();
+        copy.name = null;
         return copy;
       },
       findElementsByClass: function (root, className, recursive, buffer) {

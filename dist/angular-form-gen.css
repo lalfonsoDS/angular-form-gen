@@ -1,5 +1,5 @@
 /*!
-   angular-form-gen-ws v0.1.1-beta.1
+   angular-form-gen-ws v0.1.2
    (c) 2017 (null) McNull https://github.com/McNull/angular-form-gen
    License: MIT
 */
@@ -108,9 +108,9 @@
   outline: none;
 }
 
-.fg-field-overlay .btn-toolbar-right button:hover {
+/*.fg-field-overlay .btn-toolbar-right button:hover {
   border: 1px solid;
-}
+}*/
 
 .fg-field-overlay .btn-toolbar-left {
   left: 5px;
@@ -237,7 +237,7 @@
 }
 
 .fg-edit-canvas-area-empty-x {
-  font-size: 200px;
+  font-size: 24px;
   line-height: 200px;
 }
 

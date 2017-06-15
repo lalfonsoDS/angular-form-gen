@@ -7,6 +7,7 @@ var fg = angular.module('fg', ['dq']);
  */
 fg.constant('FgField', function FgField(type, properties) {
     // this.name = this.type = type;
+    this.name = null;
     this.type = type;
 
     if (properties) {

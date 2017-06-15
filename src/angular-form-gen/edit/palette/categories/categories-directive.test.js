@@ -15,6 +15,8 @@ describe('fg-edit-palette-categories-directive', function() {
 
   });
 
+  return;
+
   it('should compile template', function() {
 
     // Arrange
