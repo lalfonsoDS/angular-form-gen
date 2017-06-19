@@ -8,4 +8,4 @@
        placeholder="{{ field.schema.placeholder }}"
        ng-model="form.data[field.schema.name]"
        ng-required="field.schema.validation.required"
-       ng-pattern="/{{ field.schema.validation.pattern }}/">
+       ng-pattern="field.schema.validation.pattern">

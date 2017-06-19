@@ -37,7 +37,7 @@
 <div ng-if="fields.displayname">
   <div fg-property-field="displayName" fg-property-field-label="Display name">
     <input type="text" class="form-control" name="displayName" ng-model="field.displayName"
-           change-on-blur="propChanged()"/>
+           ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}" />
   </div>
 </div>
 
@@ -48,7 +48,7 @@
            class="form-control"
            name="fieldPlaceholder"
            ng-model="field.placeholder"
-           change-on-blur="propChanged()"/>
+           ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}" />
   </div>
 </div>
 
@@ -59,6 +59,6 @@
            class="form-control"
            name="fieldTooltip"
            ng-model="field.tooltip"
-           change-on-blur="propChanged()"/>
+           ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}"/>
   </div>
 </div>
