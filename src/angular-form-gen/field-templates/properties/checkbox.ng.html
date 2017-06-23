@@ -3,10 +3,11 @@
   <div fg-property-field="fieldValue">
     <div class="checkbox">
       <label title="Set the initial value of this field.">
-        <input type="checkbox" name="fieldValue" ng-model="field.value"/>
+        <input type="checkbox" name="fieldValue" ng-model="field.value"
+               ng-change="propChanged()"
+        />
         Initial value
       </label>
     </div>
   </div>
 </div>
-

@@ -34,7 +34,6 @@ fg.controller('fgFieldController', function($scope, fgUtils) {
   };
 
   this.initDefaultData = function(fieldSchema, editMode) {
-
     var fieldName = fieldSchema.name;
 
     _form.data = _form.data || {};

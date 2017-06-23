@@ -23,21 +23,51 @@
            change-on-blur="propChanged()"/>
     FTFs: {{formTypeFields}} -->
 
-    <select class="form-control"
+    <!-- <select class="form-control"
            ng-required="true"
            ng-model="field.name"
-           ng-change="propChanged()"
+           ng-change="fieldNameDropDownChanged()"
            ng-options="formTypeField.fieldName as formTypeField.fieldName for formTypeField in field.formTypeFields">
-           <option value="">Select One</option>
+           <option value="none">Select One</option>
+    </select> -->
+
+    <select class="form-control"
+           ng-model="field.selectedFieldName"
+           ng-change="updateSelectedFieldName()"
+           fg-unique-field-name>
+
+           <option value="" ng-selected="selected">None</option>
+           <option ng-repeat="item in field.formTypeFields">{{item.fieldName}}</option>
+           <option value="custom">Custom</option>
+           <!--
+           <option value="">None</option>
+           <option value="custom">Custom</option> -->
     </select>
+    <!-- ng-options="formTypeField.fieldName as formTypeField.fieldName for formTypeField in field.formTypeFields"> -->
+
+
+
   </div>
+
+  <div ng-if="field.selectedFieldName === 'custom'" class="internalNameFreeText">
+      <input
+           type="text"
+           class="form-control"
+           placeholder="Please enter the internal name"
+           name="fieldName"
+           ng-model="field.textFieldName"
+           ng-pattern="/^[a-zA-Z]([\w]+)?$/"
+           fg-unique-field-name
+           ng-change="updateTextFieldName()" ng-model-options="{updateOn: 'blur'}" />
+  </div>
+
 </div>
 
 <!-- displayName -->
 <div ng-if="fields.displayname">
   <div fg-property-field="displayName" fg-property-field-label="Display name">
     <input type="text" class="form-control" name="displayName" ng-model="field.displayName"
-           change-on-blur="propChanged()"/>
+           ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}" />
   </div>
 </div>
 
@@ -48,7 +78,7 @@
            class="form-control"
            name="fieldPlaceholder"
            ng-model="field.placeholder"
-           change-on-blur="propChanged()"/>
+           ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}" />
   </div>
 </div>
 
@@ -59,6 +89,6 @@
            class="form-control"
            name="fieldTooltip"
            ng-model="field.tooltip"
-           change-on-blur="propChanged()"/>
+           ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}"/>
   </div>
 </div>
