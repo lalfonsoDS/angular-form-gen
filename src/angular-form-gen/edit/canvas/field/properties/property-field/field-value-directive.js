@@ -30,8 +30,16 @@ fg.directive('fgPropertyFieldValue', function(fgPropertyFieldValueLinkFn) {
 
   return function($scope, $element, $attrs, ctrls) {
 
+    $scope.previous = {};
+    angular.copy($scope.field, $scope.previous);
+
     $scope.propChanged = function() {
-      $scope.$emit('propChanged', $scope.index);
+
+      $scope.$emit('propChanged', $scope.index, function() {
+        angular.copy($scope.field, $scope.previous);
+      }, function(){
+        angular.copy($scope.previous, $scope.field);
+      });
     }
 
     $scope.updateSelectedFieldName = function() {
@@ -69,7 +77,6 @@ fg.directive('fgPropertyFieldValue', function(fgPropertyFieldValueLinkFn) {
     var oldViewValue;
 
     $scope.$watch('field.$_redraw', function(value) {
-
       if (value) {
 
         var ngModelCtrl = frmCtrl['fieldValue'];

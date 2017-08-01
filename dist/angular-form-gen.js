@@ -1,5 +1,5 @@
 /*!
-   angular-form-gen-ws v0.2.1
+   angular-form-gen-ws v0.2.2
    (c) 2017 (null) McNull https://github.com/McNull/angular-form-gen
    License: MIT
 */
@@ -338,11 +338,11 @@ angular.module('fg').run(['$templateCache', function($templateCache){
     '    </textarea></div></div><div fg-tabs-pane=\"Validation\"><div fg-property-field-validation=\"{ required: true, minlength: true, maxlength: true, pattern: true }\"></div></div>');
   $templateCache.put('angular-form-gen/form/field/field.ng.html', '<div class=\"fg-field-inner form-group\" ng-class=\"{ \'fg-field-required\': fieldSchema.validation.required, \'has-error\': form.state[field.name].$invalid }\"><label ng-if=\"!field.schema.nolabel\" class=\"col-sm-22 control-label col-sm-offset-1\" for=\"{{ field.$_id }}\" style=\"margin-bottom: 6px\">{{ fieldSchema.displayName }}</label><div class=\"col-sm-24 included-field-template\" ng-class=\"{ \'col-sm-offset-6\': field.schema.nolabel }\"><div ng-include=\"renderInfo.templateUrl\"></div><div fg-validation-summary=\"\" fg-validation-messages=\"fieldSchema.validation.messages\" ng-if=\"!noValidationSummary\"></div></div></div>');
   $templateCache.put('angular-form-gen/form/form-fields/form-fields.ng.html', '<div class=\"fg-form-fields\"><fieldset><div ng-repeat=\"field in form.schema.fields\"><div fg-field=\"field\"></div></div></fieldset></div>');
-  $templateCache.put('angular-form-gen/edit/palette/categories/categories.ng.html', '<legend>Palette</legend><div class=\"fg-field palette-categories\" ng-click=\"paletteCategoriesMenuOpen = !paletteCategoriesMenuOpen\" ng-class=\"{ \'open\': paletteCategoriesMenuOpen }\"><span class=\"fg-legend-extra fg-edit-palette-categories visible-xs-inline visible-md-inline visible-lg-inline\">{{ categoryName || \'All field types\' }}</span> <i class=\"caret\"></i><ul class=\"dropdown-menu\"><li ng-repeat=\"(name, category) in categories\" ng-class=\"{ \'active\': categoryName === name }\"><a ng-click=\"setCategory(name, category)\">{{ name }}</a></li><li class=\"divider\"></li><li ng-class=\"{ \'active\': !category }\"><a ng-click=\"setCategory(null)\">All field types</a></li></ul></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/field.ng.html', '<div class=\"fg-field fg-field-{{ field.type }} fg-edit-canvas-field\" ng-class=\"{ \'error\': field.$$_invalid, \'dragging\': field.$_isDragging }\" dq-draggable=\"fg-edit-canvas\" dq-drag-disabled=\"dragEnabled === false\" dq-drag-begin=\"canvasCtrl.dragBeginCanvasField($index, field)\" dq-drag-end=\"canvasCtrl.dragEndCanvasField(field)\"><div class=\"fg-field-overlay\" ng-mouseenter=\"dragEnabled = true\" ng-mouseleave=\"dragEnabled = false\"><div class=\"fg-field-overlay-drag-top\" dq-drag-enter=\"dragPlaceholder.index = $index\"></div><div class=\"fg-field-overlay-drag-bottom\" dq-drag-enter=\"dragPlaceholder.index = ($index + 1)\"></div><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs\" type=\"button\" ng-disabled=\"field.$_displayProperties && field.$_invalid\" ng-class=\"{ \'active\': field.$_displayProperties }\" ng-click=\"toggleProperties(field)\" title=\"Configure this field.\"><img src=\"https://s3.amazonaws.com/workstride-assets/workstride-assets/images/formBuilder/edit_icon.png\"></button><button class=\"btn btn-default btn-xs\" type=\"button\" ng-click=\"schemaCtrl.removeField($index)\" title=\"Remove\"><img src=\"https://s3.amazonaws.com/workstride-assets/workstride-assets/images/formBuilder/delete_icon.png\"></button></div></div><div ng-form=\"\" fg-null-form=\"\"><div fg-field=\"field\" fg-tab-index=\"-1\" fg-edit-mode=\"true\" fg-no-validation-summary=\"true\"></div></div><div class=\"fg-field-properties-container\" ng-class=\"{ visible: field.$_displayProperties }\"><div fg-edit-canvas-field-properties=\"field\" index=\"$index\" ng-if=\"expanded\"></div></div></div>');
+  $templateCache.put('angular-form-gen/edit/palette/categories/categories.ng.html', '<legend>Palette</legend><div class=\"fg-field palette-categories\" ng-click=\"paletteCategoriesMenuOpen = !paletteCategoriesMenuOpen\" ng-class=\"{ \'open\': paletteCategoriesMenuOpen }\"><span class=\"fg-legend-extra fg-edit-palette-categories visible-xs-inline visible-md-inline visible-lg-inline\">{{ categoryName || \'All field types\' }}</span> <i class=\"caret\"></i><ul class=\"dropdown-menu\"><li ng-repeat=\"(name, category) in categories\" ng-class=\"{ \'active\': categoryName === name }\"><a ng-click=\"setCategory(name, category)\">{{ name }}</a></li><li class=\"divider\"></li><li ng-class=\"{ \'active\': !category }\"><a ng-click=\"setCategory(null)\">All field types</a></li></ul></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/properties.ng.html', '<div class=\"fg-field-properties\"><div novalidate=\"\" ng-form=\"fieldPropertiesForm\"><div fg-tabs=\"property.tabs\"><div ng-include=\"renderInfo.propertiesTemplateUrl\"></div></div></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/options/options.ng.html', '<div ng-if=\"!field.options || field.options.length === 0\" ng-click=\"optionsCtrl.addOption()\" class=\"alert alert-info\"><h2>No options defined</h2><p class=\"lead\">Click here to add a new option definition to this field.</p></div><table ng-if=\"field.options.length > 0\" class=\"table-field-options\"><thead><tr><th></th><th>Value</th><th>Text</th><th><a href=\"\" class=\"btn btn-default btn-xs\" ng-click=\"optionsCtrl.addOption()\" title=\"Add a new option to the list\"><i class=\"glyphicon glyphicon-plus\"></i></a></th><th class=\"table-field-options-padding\"></th></tr></thead><tbody><tr ng-form=\"fieldOptionForm\" ng-repeat=\"option in field.options\" ng-class=\"{ \'error\': fieldOptionForm.$invalid }\"><td ng-if=\"multiple === false\"><input type=\"radio\" name=\"{{ field.name }}selection[]\" value=\"{{ option.value }}\" ng-model=\"field.value\" ng-click=\"optionsCtrl.toggleOption(option.value)\"></td><td ng-if=\"multiple === true\"><input type=\"checkbox\" name=\"{{ field.name }}selection[]\" value=\"{{ option.value }}\" ng-model=\"field.value[option.value]\"></td><td><input type=\"text\" name=\"optionValue\" ng-model=\"option.value\" class=\"form-control\" ng-required=\"field.type != \'selectlist\'\"></td><td><input type=\"text\" ng-model=\"option.text\" class=\"form-control\"></td><td><a href=\"\" class=\"btn btn-default btn-xs\" ng-click=\"optionsCtrl.removeOption($index)\" title=\"Remove this option from the list\"><i class=\"glyphicon glyphicon-trash\"></i></a></td><td></td></tr></tbody></table>');
-  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/common.ng.html', '<div ng-if=\"fields.fieldname\"><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\"><select class=\"form-control\" ng-model=\"field.selectedFieldName\" ng-change=\"updateSelectedFieldName()\" fg-unique-field-name=\"\"><option value=\"\" ng-selected=\"selected\">None</option><option ng-repeat=\"item in field.formTypeFields\">{{item.fieldName}}</option><option value=\"custom\">Custom</option></select></div><div ng-if=\"field.selectedFieldName === \'custom\'\" class=\"internal-name-fee-text\"><input type=\"text\" class=\"form-control\" placeholder=\"Please enter the internal name\" name=\"fieldName\" ng-model=\"field.textFieldName\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\" ng-change=\"updateTextFieldName()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div><div ng-if=\"fields.displayname\"><div fg-property-field=\"displayName\" fg-property-field-label=\"Display name\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.displayName\" ng-change=\"propChanged()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div><div ng-if=\"fields.placeholder\"><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\" ng-change=\"propChanged()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div><div ng-if=\"fields.tooltip\"><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\" ng-change=\"propChanged()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div>');
+  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/common.ng.html', '<div ng-if=\"fields.fieldname\"><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\"><select class=\"form-control\" ng-model=\"field.selectedFieldName\" ng-change=\"updateSelectedFieldName()\" fg-unique-field-name=\"\"><option value=\"\" ng-selected=\"selected\">None</option><option ng-repeat=\"item in field.formTypeFields\">{{item.fieldName}}</option><option value=\"custom\">Custom</option></select></div><div ng-if=\"previous.selectedFieldName === \'custom\'\" class=\"internal-name-fee-text\"><input type=\"text\" class=\"form-control\" placeholder=\"Please enter the internal name\" name=\"fieldName\" ng-model=\"field.textFieldName\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\" ng-change=\"updateTextFieldName()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div><div ng-if=\"fields.displayname\"><div fg-property-field=\"displayName\" fg-property-field-label=\"Display name\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.displayName\" ng-change=\"propChanged()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div><div ng-if=\"fields.placeholder\"><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\" ng-change=\"propChanged()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div><div ng-if=\"fields.tooltip\"><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\" ng-change=\"propChanged()\" ng-model-options=\"{updateOn: \'blur\'}\"></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/field-value.ng.html', '<div ng-if=\"draw\"><div fg-property-field=\"fieldValue\" fg-property-field-label=\"Initial value\"><div ng-transclude=\"\"></div></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/property-field.ng.html', '<div class=\"form-group fg-property-field\" ng-class=\"{ \'has-error\': fieldPropertiesForm[fieldName].$invalid }\"><label class=\"col-sm-24 col-md-24 control-label\">{{ fieldLabel }}</label><div class=\"col-sm-24 col-md-24\"><div ng-transclude=\"\"></div><div fg-validation-summary=\"{{ fieldName }}\"></div></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/validation/validation-message.ng.html', '<div ng-form=\"valMsgForm\"><div fg-property-field=\"message\" fg-property-field-label=\"Message\"><input type=\"text\" name=\"message\" title=\"{{ tooltip }}\" placeholder=\"Optional message\" ng-model=\"field.validation.messages[validationType]\" class=\"form-control\"></div></div>');
@@ -1208,8 +1208,8 @@ angular.module('dq').directive('dqDraggable', ["dqUtils", "$rootScope", function
 }]);
 fg.controller('fgEditController', ["$scope", "fgUtils", "$location", function ($scope, fgUtils, $location) {
 
-  $scope.$on('propChanged', function(event, data) {
-    $scope.modifyPropertyCallback(data);
+  $scope.$on('propChanged', function(event, data, success, error) {
+    $scope.modifyPropertyCallback(data, success, error);
   });
 
 //  var self = this;
@@ -2195,28 +2195,58 @@ fg.controller('fgSchemaController', ["$scope", "fgUtils", function($scope, fgUti
   };
 
   this.addField = function(field, index) {
+    var success = function(){
+        //no action
+    }
+    var error = function(){
+      angular.copy(_previousValue, _model.fields);
+    }
+
+    var _previousValue = [];
+    angular.copy(_model.fields, _previousValue);
+
     var copy = fgUtils.copyField(field);
     copy.formTypeFields = _formTypeFields;
 
     index = index === undefined ? _model.fields.length : index;
     _model.fields.splice(index, 0, copy);
+
     //call to the add field callback function if it's set
     if (this.addFieldCallback) {
-      this.addFieldCallback(field, index);
-    }
-
+      this.addFieldCallback(field, index, success, error);
+    };
   };
 
   this.removeField = function(index) {
+    var success = function(){
+      //no action
+    }
+    var error = function(){
+      angular.copy(_previousValue, _model.fields);
+    }
+
+    var _previousValue = [];
+    angular.copy(_model.fields, _previousValue);
+
     _model.fields.splice(index, 1);
 
     //call to the remove field callback function if it's set
     if (this.removeFieldCallback) {
-      this.removeFieldCallback(index);
-    }
+      this.removeFieldCallback(index, success, error);
+    };
   };
 
   this.swapFields = function(idx1, idx2) {
+    var success = function(){
+      //no action
+    }
+    var error = function(){
+      angular.copy(_previousValue, _model.fields);
+    }
+
+    var _previousValue = [];
+    angular.copy(_model.fields, _previousValue);
+
     if (idx1 <= -1 || idx2 <= -1 || idx1 >= _model.fields.length || idx2 >= _model.fields.length) {
       return;
     }
@@ -2224,20 +2254,33 @@ fg.controller('fgSchemaController', ["$scope", "fgUtils", function($scope, fgUti
 
     //call to the move field callback function if it's set
     if (this.moveFieldCallback) {
-      this.moveFieldCallback(idx1, idx2);
-    }
+      this.moveFieldCallback(idx1, idx2, success, error);
+    };
   };
 
   this.moveField = function(fromIdx, toIdx) {
     if ((fromIdx >= 0) && (toIdx <= _model.fields.length) && (fromIdx !== toIdx)) {
+
+      var success = function(){
+        //no action
+      }
+
+      var error = function(){
+        debugger
+        _previousValue[fromIdx].$_isDragging = false;
+        _model.fields = angular.copy(_previousValue);
+      }
+
+      var _previousValue = angular.copy(_model.fields);
+
       var field = _model.fields.splice(fromIdx, 1)[0];
       if (toIdx > fromIdx)--toIdx;
       _model.fields.splice(toIdx, 0, field);
 
       //call to the move field callback function if it's set
       if (this.moveFieldCallback) {
-        this.moveFieldCallback(fromIdx, toIdx);
-      }
+        this.moveFieldCallback(fromIdx, toIdx, success, error);
+      };
     }
   };
 
@@ -2537,8 +2580,16 @@ fg.directive('fgPropertyFieldValue', ["fgPropertyFieldValueLinkFn", function(fgP
 
   return function($scope, $element, $attrs, ctrls) {
 
+    $scope.previous = {};
+    angular.copy($scope.field, $scope.previous);
+
     $scope.propChanged = function() {
-      $scope.$emit('propChanged', $scope.index);
+
+      $scope.$emit('propChanged', $scope.index, function() {
+        angular.copy($scope.field, $scope.previous);
+      }, function(){
+        angular.copy($scope.previous, $scope.field);
+      });
     }
 
     $scope.updateSelectedFieldName = function() {
@@ -2575,8 +2626,12 @@ fg.directive('fgPropertyFieldValue', ["fgPropertyFieldValueLinkFn", function(fgP
     var frmCtrl = ctrls[0];
     var oldViewValue;
 
-    $scope.$watch('field.$_redraw', function(value) {
+    $scope.$watch('field', function(value1, value2) {
+      debugger;
+    });
 
+    $scope.$watch('field.$_redraw', function(value) {
+      debugger
       if (value) {
 
         var ngModelCtrl = frmCtrl['fieldValue'];
@@ -2594,6 +2649,7 @@ fg.directive('fgPropertyFieldValue', ["fgPropertyFieldValueLinkFn", function(fgP
     });
 
     $scope.$watch(function() { return frmCtrl['fieldValue']; }, function(ngModelCtrl) {
+      debugger
       if(ngModelCtrl && oldViewValue) {
         ngModelCtrl.$setViewValue(oldViewValue);
         ngModelCtrl.$render();
@@ -2684,6 +2740,9 @@ fg.directive('fgPropertyFieldValidation', ["fgPropertyFieldValidationLinkFn", fu
 
   return function($scope, $element, $attrs, ctrls) {
 
+    $scope.previous = {};
+    angular.copy($scope.field, $scope.previous);
+
     $scope.patternOptions = patternOptions;
 
     $scope.field.validation = $scope.field.validation || {};
@@ -2701,7 +2760,11 @@ fg.directive('fgPropertyFieldValidation', ["fgPropertyFieldValidationLinkFn", fu
     });
 
     $scope.propChanged = function() {
-      $scope.$emit('propChanged', $scope.index);
+      $scope.$emit('propChanged', $scope.index, function() {
+        angular.copy($scope.field, $scope.previous);
+      }, function(){
+        angular.copy($scope.previous, $scope.field);
+      });
     }
   };
 }]);

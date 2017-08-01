@@ -15,6 +15,9 @@ fg.directive('fgPropertyFieldValidation', function(fgPropertyFieldValidationLink
 
   return function($scope, $element, $attrs, ctrls) {
 
+    $scope.previous = {};
+    angular.copy($scope.field, $scope.previous);
+
     $scope.patternOptions = patternOptions;
 
     $scope.field.validation = $scope.field.validation || {};
@@ -32,7 +35,11 @@ fg.directive('fgPropertyFieldValidation', function(fgPropertyFieldValidationLink
     });
 
     $scope.propChanged = function() {
-      $scope.$emit('propChanged', $scope.index);
+      $scope.$emit('propChanged', $scope.index, function() {
+        angular.copy($scope.field, $scope.previous);
+      }, function(){
+        angular.copy($scope.previous, $scope.field);
+      });
     }
   };
 });

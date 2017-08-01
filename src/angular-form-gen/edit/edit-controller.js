@@ -1,7 +1,7 @@
 fg.controller('fgEditController', function ($scope, fgUtils, $location) {
 
-  $scope.$on('propChanged', function(event, data) {
-    $scope.modifyPropertyCallback(data);
+  $scope.$on('propChanged', function(event, data, success, error) {
+    $scope.modifyPropertyCallback(data, success, error);
   });
 
 //  var self = this;
