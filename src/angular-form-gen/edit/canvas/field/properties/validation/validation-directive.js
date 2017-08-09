@@ -35,10 +35,13 @@ fg.directive('fgPropertyFieldValidation', function(fgPropertyFieldValidationLink
     });
 
     $scope.propChanged = function() {
+      $scope.field.processing = true;
       $scope.$emit('propChanged', $scope.index, function() {
         angular.copy($scope.field, $scope.previous);
+        $scope.field.processing = false;
       }, function(){
         angular.copy($scope.previous, $scope.field);
+        $scope.field.processing = false;
       });
     }
   };
