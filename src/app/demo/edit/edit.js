@@ -1,25 +1,21 @@
 app.controller('FormEditCtrl', function ($scope, $location, inform, $window, formMetaInfo, form, Form) {
 
-  $scope.addFieldCallback = function(field, index, success) {
-    debugger
+  $scope.addFieldCallback = function(field, index, success, error) {
     console.log("added field: ", index, field);
     success();
   }
 
-  $scope.moveFieldCallback = function(fromIdx, toIdx, success) {
-    debugger
+  $scope.moveFieldCallback = function(fromIdx, toIdx, success, error) {
     console.log("moved field from / to: ", fromIdx, toIdx);
     success();
   }
 
-  $scope.removeFieldCallback = function(index, success) {
-    debugger
+  $scope.removeFieldCallback = function(index, success, error) {
     console.log("removed field: ", index);
     success();
   }
 
   $scope.modifyPropertyCallback = function(index, success, error) {
-    debugger
     console.log("FIELD: ", $scope.form.schema.fields[index]);
     success();
   }

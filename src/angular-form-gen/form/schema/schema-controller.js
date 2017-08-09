@@ -26,12 +26,14 @@ fg.controller('fgSchemaController', function($scope, fgUtils) {
 
   this.addField = function(field, index) {
     var success = function(){
-        //no action
+      copy.processing = false;
     }
     var error = function(){
       angular.copy(_previousValue, _model.fields);
+      copy.processing = false;
     }
 
+    field.processing = true;
     var _previousValue = [];
     angular.copy(_model.fields, _previousValue);
 
@@ -43,22 +45,25 @@ fg.controller('fgSchemaController', function($scope, fgUtils) {
 
     //call to the add field callback function if it's set
     if (this.addFieldCallback) {
-      this.addFieldCallback(field, index, success, error);
+      this.addFieldCallback(copy, index, success, error);
     };
   };
 
   this.removeField = function(index) {
     var success = function(){
-      //no action
+      _model.fields.splice(index, 1);
+      field.processing = false;
     }
     var error = function(){
       angular.copy(_previousValue, _model.fields);
+      field.processing = false;
     }
 
+    var field = _model.fields[index];
+
+    field.processing = true;
     var _previousValue = [];
     angular.copy(_model.fields, _previousValue);
-
-    _model.fields.splice(index, 1);
 
     //call to the remove field callback function if it's set
     if (this.removeFieldCallback) {
@@ -68,11 +73,20 @@ fg.controller('fgSchemaController', function($scope, fgUtils) {
 
   this.swapFields = function(idx1, idx2) {
     var success = function(){
-      //no action
+      field1.processing = false;
+      field2.processing = false;
     }
     var error = function(){
       angular.copy(_previousValue, _model.fields);
+      field1.processing = false;
+      field2.processing = false;
     }
+
+    var field1 = _model.fields[idx1];
+    var field2 = _model.fields[idx2];
+
+    field1.processing = true;
+    field2.processing = true;
 
     var _previousValue = [];
     angular.copy(_model.fields, _previousValue);
@@ -92,17 +106,20 @@ fg.controller('fgSchemaController', function($scope, fgUtils) {
     if ((fromIdx >= 0) && (toIdx <= _model.fields.length) && (fromIdx !== toIdx)) {
 
       var success = function(){
-        //no action
+        field.processing = false;
       }
 
       var error = function(){
         _previousValue[fromIdx].$_isDragging = false;
         _model.fields = angular.copy(_previousValue);
+        field.processing = false;
       }
 
       var _previousValue = angular.copy(_model.fields);
-
       var field = _model.fields.splice(fromIdx, 1)[0];
+      field.processing = true;
+      console.log(field)
+
       if (toIdx > fromIdx)--toIdx;
       _model.fields.splice(toIdx, 0, field);
 

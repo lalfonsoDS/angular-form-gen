@@ -6,7 +6,8 @@
      dq-drag-end="canvasCtrl.dragEndCanvasField(field)">
   <div class="fg-field-overlay"
        ng-mouseenter="dragEnabled = true"
-       ng-mouseleave="dragEnabled = false">
+       ng-mouseleave="dragEnabled = false"
+       >
     <div class="fg-field-overlay-drag-top" dq-drag-enter="dragPlaceholder.index = $index"></div>
     <div class="fg-field-overlay-drag-bottom" dq-drag-enter="dragPlaceholder.index = ($index + 1)"></div>
     <div class="btn-toolbar btn-toolbar-right">
@@ -33,6 +34,14 @@
 
   <div class="fg-field-properties-container" ng-class="{ visible: field.$_displayProperties }">
     <div fg-edit-canvas-field-properties="field" index="$index" ng-if="expanded">
+    </div>
+  </div>
+
+  <div ng-if="field.processing" ng-class="{ 'field-overlay': field.processing }">
+    <div class="loader-container">
+      <div class="field-loader">
+
+      </div>
     </div>
   </div>
 
