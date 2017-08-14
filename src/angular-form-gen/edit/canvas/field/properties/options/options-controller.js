@@ -66,6 +66,8 @@ fg.controller('fgPropertyFieldOptionsController', function($scope) {
       $scope.field.value = option.value;
     }
 
+    $scope.propChanged();
+
   };
 
   this.removeOption = function(index) {
@@ -89,6 +91,8 @@ fg.controller('fgPropertyFieldOptionsController', function($scope) {
         option.$_valueWatchFn();
       }
     }
+    $scope.propChanged();
+    
   };
 
 });

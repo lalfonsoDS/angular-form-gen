@@ -14,7 +14,6 @@ fg.directive('fgPropertyFieldValidation', function(fgPropertyFieldValidationLink
   });
 
   return function($scope, $element, $attrs, ctrls) {
-
     $scope.previous = {};
     angular.copy($scope.field, $scope.previous);
 

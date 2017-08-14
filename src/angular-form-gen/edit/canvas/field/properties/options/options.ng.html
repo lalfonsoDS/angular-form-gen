@@ -11,7 +11,7 @@
     <th>Value</th>
     <th>Text</th>
     <th>
-      <a href="" class="btn btn-default btn-xs" ng-click="optionsCtrl.addOption()" title="Add a new option to the list"><i
+      <a href="" class="btn btn-default btn-xs" ng-click="optionsCtrl.addOption()" title="Add a new option to the list" ><i
           class="glyphicon glyphicon-plus"></i></a>
     </th>
     <th class="table-field-options-padding"></th>
@@ -20,17 +20,19 @@
   <tbody>
   <tr ng-form="fieldOptionForm" ng-repeat="option in field.options" ng-class="{ 'error': fieldOptionForm.$invalid }">
     <td ng-if="multiple === false">
+      <!-- <input ng-change="propChanged()" type="radio" name="{{ field.name }}selection[]" value="{{ option.value }}" ng-model="field.value" ng-click="optionsCtrl.toggleOption(option.value)"/> -->
       <input type="radio" name="{{ field.name }}selection[]" value="{{ option.value }}" ng-model="field.value" ng-click="optionsCtrl.toggleOption(option.value)"/>
     </td>
     <td ng-if="multiple === true">
       <input type="checkbox" name="{{ field.name }}selection[]" value="{{ option.value }}"
-             ng-model="field.value[option.value]"/>
+             ng-model="field.value[option.value]"
+             ng-change="propChanged()"/>
     </td>
     <td>
-      <input type="text" name="optionValue" ng-model="option.value" class="form-control" ng-required="field.type != 'selectlist'"/>
+      <input ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}" type="text" name="optionValue" ng-model="option.value" class="form-control" ng-required="field.type != 'selectlist'"/>
     </td>
     <td>
-      <input type="text" ng-model="option.text" class="form-control"/>
+      <input ng-change="propChanged()" ng-model-options="{updateOn: 'blur'}" type="text" ng-model="option.text" class="form-control"/>
     </td>
     <td>
       <a href="" class="btn btn-default btn-xs" ng-click="optionsCtrl.removeOption($index)"

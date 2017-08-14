@@ -185,7 +185,7 @@ fg.config(function (fgConfigProvider, FgField) {
       new FgField('date')
     ],
     'Checkbox fields': [
-      new FgField('checkbox', { nolabel: true }),
+      new FgField('checkbox', { nolabel: false }),
       new FgField('checkboxlist', {
         displayName: 'Checkbox List',
         options: [

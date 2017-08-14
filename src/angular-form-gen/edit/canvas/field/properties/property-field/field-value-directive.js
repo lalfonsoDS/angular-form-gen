@@ -34,7 +34,6 @@ fg.directive('fgPropertyFieldValue', function(fgPropertyFieldValueLinkFn) {
     angular.copy($scope.field, $scope.previous);
 
     $scope.propChanged = function() {
-
       $scope.field.processing = true;
       $scope.$emit('propChanged', $scope.index, function() {
         angular.copy($scope.field, $scope.previous);

@@ -14,6 +14,17 @@ fg.directive('fgPropertyFieldCommon', function(fgPropertyFieldCommonLinkFn) {
       focus: false
     };
 
+    $scope.propChanged = function() {
+      $scope.field.processing = true;
+      $scope.$emit('propChanged', $scope.index, function() {
+        angular.copy($scope.field, $scope.previous);
+        $scope.field.processing = false;
+      }, function(){
+        angular.copy($scope.previous, $scope.field);
+        $scope.field.processing = false;
+      });
+    }
+
     $scope.$watch($attrs['fgPropertyFieldCommon'], function(value) {
       $scope.fields = angular.extend($scope.fields, value);
     });
