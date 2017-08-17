@@ -28,5 +28,34 @@ fg.directive('fgPropertyFieldOptions', function(fgPropertyFieldOptionsLinkFn) {
         $scope.field.processing = false;
       });
     }
+
+    $scope.updateSelectedFieldName = function() {
+      if ($scope.field.selectedFieldName === 'custom' && $scope.field.textFieldName) {
+        $scope.field.name = $scope.field.textFieldName;
+      } else {
+        $scope.field.name = $scope.field.selectedFieldName;
+      }
+      $scope.propChanged();
+    };
+
+    $scope.updateTextFieldName = function() {
+      $scope.field.name = $scope.field.textFieldName;
+      $scope.propChanged();
+    };
+
+    var found = false;
+    if ($scope.field.name) {
+      angular.forEach($scope.field.formTypeFields, function(formType) {
+        if (formType.fieldName === $scope.field.name) {
+          found = true;
+        }
+      });
+      if (found) {
+        $scope.field.selectedFieldName = $scope.field.name;
+      } else {
+        $scope.field.selectedFieldName = 'custom';
+        $scope.field.textFieldName = $scope.field.name;
+      }
+    }
   };
 });

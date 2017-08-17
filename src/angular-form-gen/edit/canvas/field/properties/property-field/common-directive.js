@@ -6,6 +6,9 @@ fg.directive('fgPropertyFieldCommon', function(fgPropertyFieldCommonLinkFn) {
   };
 }).factory('fgPropertyFieldCommonLinkFn', function($rootScope) {
   return function($scope, $element, $attrs, ctrls) {
+    $scope.previous = {};
+    angular.copy($scope.field, $scope.previous);
+
     $scope.fields = {
       fieldname: false,
       displayname: false,
@@ -23,6 +26,35 @@ fg.directive('fgPropertyFieldCommon', function(fgPropertyFieldCommonLinkFn) {
         angular.copy($scope.previous, $scope.field);
         $scope.field.processing = false;
       });
+    }
+
+    $scope.updateSelectedFieldName = function() {
+      if ($scope.field.selectedFieldName === 'custom' && $scope.field.textFieldName) {
+        $scope.field.name = $scope.field.textFieldName;
+      } else {
+        $scope.field.name = $scope.field.selectedFieldName;
+      }
+      $scope.propChanged();
+    };
+
+    $scope.updateTextFieldName = function() {
+      $scope.field.name = $scope.field.textFieldName;
+      $scope.propChanged();
+    };
+
+    var found = false;
+    if ($scope.field.name) {
+      angular.forEach($scope.field.formTypeFields, function(formType) {
+        if (formType.fieldName === $scope.field.name) {
+          found = true;
+        }
+      });
+      if (found) {
+        $scope.field.selectedFieldName = $scope.field.name;
+      } else {
+        $scope.field.selectedFieldName = 'custom';
+        $scope.field.textFieldName = $scope.field.name;
+      }
     }
 
     $scope.$watch($attrs['fgPropertyFieldCommon'], function(value) {

@@ -45,7 +45,6 @@ fg.directive('fgPropertyFieldValue', function(fgPropertyFieldValueLinkFn) {
     }
 
     $scope.updateSelectedFieldName = function() {
-
       if ($scope.field.selectedFieldName === 'custom' && $scope.field.textFieldName) {
         $scope.field.name = $scope.field.textFieldName;
       } else {
